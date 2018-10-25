@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <!-- 页面5秒刷新一次 -->
+        <!--<meta http-equiv="refresh" content="5">-->
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta name="author" content="test">
+        <meta name="description" content="test">
+        <meta name="keywords" content="test,test,test">
+
+        <style>
+            *{
+                box-sizing: border-box;
+                outline: none;
+            }
+            .wheel{
+                position: relative;
+                width: 100px;
+                height: 100px;
+                border: solid 10px darkolivegreen;
+                background: paleturquoise;
+                /*margin: auto auto;*/
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+                /*animation: myscroll 0.4s infinite;*/
+            }
+            .wheel::before,.wheel::after{
+                content: " ";
+                position: absolute;
+                background: darkgreen;
+                /*z-index: 999;*/
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                transform: rotate(45deg);
+                animation: lineScroll 0.5s infinite;
+            }
+            .wheel::before{
+                width: 100%;
+                height: 3px;
+                top: 48%;
+            }
+            .wheel::after{
+                width: 3px;
+                height: 100%;
+                left: 48%;
+            }
+            
+            @keyframes myscroll {
+                0%{
+                    -webkit-transform: rotate(0deg);
+                    -moz-transform: rotate(0deg);
+                    transform: rotate(0deg);
+                }
+                25%{
+                    -webkit-transform: rotate(90deg);
+                    -moz-transform: rotate(90deg);
+                    transform: rotate(90deg);
+                }
+                50%{
+                    -webkit-transform: rotate(180deg);
+                    -moz-transform: rotate(180deg);
+                    transform: rotate(180deg);
+                }
+                75%{
+                    -webkit-transform: rotate(270deg);
+                    -moz-transform: rotate(270deg);
+                    transform: rotate(270deg);
+                }
+                100%{
+                    -webkit-transform: rotate(360deg);
+                    -moz-transform: rotate(360deg);
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes lineScroll{
+                0%{
+                    -webkit-transform: rotate(45deg);
+                    -moz-transform: rotate(45deg);
+                    transform: rotate(45deg);
+                }
+                25%{
+                    -webkit-transform: rotate(135deg);
+                    -moz-transform: rotate(135deg);
+                    transform: rotate(135deg);
+                }
+                50%{
+                    -webkit-transform: rotate(225deg);
+                    -moz-transform: rotate(225deg);
+                    transform: rotate(225deg);
+                }
+                75%{
+                    -webkit-transform: rotate(315deg);
+                    -moz-transform: rotate(315deg);
+                    transform: rotate(315deg);
+                }
+                100%{
+                    -webkit-transform: rotate(360deg);
+                    -moz-transform: rotate(360deg);
+                    transform: rotate(360deg);
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="wheel" class="wheel"></div>
+    </body>
+
+    <script type="text/javascript">
+        document.onreadystatechange = function(){
+            if(document.readyState == 'complete')
+            {
+                window.console.log("load complete.");
+                run();
+            }
+        };
+
+        var _left = 0;
+        function run()
+        {
+            _left++;
+            var w = document.getElementById('wheel');
+            if(_left+ w.offsetWidth >= w.offsetParent.clientWidth)
+            {
+                _left = 0;
+            }
+            w.style.left = _left + "px";
+            setTimeout(run,10);
+        }
+
+    </script>
+</html>

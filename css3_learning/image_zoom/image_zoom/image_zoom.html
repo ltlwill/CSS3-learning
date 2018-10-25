@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>鼠标经过图片放大效果代码</title>
+    <style>
+        *{ padding:0; margin:0;}
+        html { overflow:-moz-scrollbars-vertical; }
+        body{ font:12px/22px "宋体"; word-break:break-all; text-align:left; background:#C0C0C0; color:#4E4E4E;}
+        ul,li{ list-style:none;}
+        a{ color:#333; text-decoration:none;}
+        a:hover{ color:#ff722d; text-decoration:none;}
+        img{ border:0;}
+        a img,a:hover img{ border:0;}
+        .latestWeb{ width:710px; margin:10px auto 0;}
+        .latestWeb ul{ overflow:hidden; _height:1%;}
+        .latestWeb li{ float:left; border:1px solid #EBEAEA; width:160px;margin:14px 15px 0 0; background:#fff }
+        .trans_msg
+        {
+            filter:alpha(opacity=100,enabled=1) revealTrans(duration=.2,transition=1) blendtrans(duration=.2);
+        }
+        div.bodycontent{font-family:Arial, Helvetica, sans-serif;padding:0 10px 10px 13px;color:#555;line-height:22px;text-align:justify;text-justify:inter-ideograph;}
+        div.bodycontent ul{margin-left:0px}
+    </style>
+    <script language="javascript">
+        function toolTip(str) {
+        }
+    </script>
+    <script language=JavaScript>
+        nereidFadeObjects = new Object();
+        nereidFadeTimers = new Object();
+        function nereidFade(object, destOp, rate, delta){
+            if (!document.all)
+                return
+            if (object != "[object]"){  //do this so I can take a string too
+                setTimeout("nereidFade("+object+","+destOp+","+rate+","+delta+")",0);
+                return;
+            }
+            clearTimeout(nereidFadeTimers[object.sourceIndex]);
+            diff = destOp-object.filters.alpha.opacity;
+            direction = 1;
+            if (object.filters.alpha.opacity > destOp){
+                direction = -1;
+            }
+            delta=Math.min(direction*diff,delta);
+            object.filters.alpha.opacity+=direction*delta;
+            if (object.filters.alpha.opacity != destOp){
+                nereidFadeObjects[object.sourceIndex]=object;
+                nereidFadeTimers[object.sourceIndex]=setTimeout("nereidFade(nereidFadeObjects["+object.sourceIndex+"],"+destOp+","+rate+","+delta+")",rate);
+            }
+        }
+    </script>
+    <style type="text/css">
+        <!--
+        .STYLE3 {color: #FFFFFF; font-size: 14px; }
+        -->
+    </style>
+</head>
+<body>
+<div class="latestWeb">
+    <table width="707" bgcolor="#FFFFFF">
+        <tr>
+            <td width="355" bgcolor="#666666"><span class="STYLE3">　以下是鼠标经过图片，跳出大图</span></td>
+            <td width="340" bgcolor="#666666"><span class="STYLE3">　以下是鼠标经过图片，图片清晰</span></td>
+        </tr>
+    </table>
+    <ul>
+        <li>
+            <div><a href="#"><img style="max-width: 200px;max-height: 200px;min-width: 200px;min-height: 200px;" src='1.jpg ' alt="这里是文字说明" border="0" onMouseOver="toolTip('<img src=1.jpg>')" onMouseOut="toolTip()"></a></div>
+        </li>
+        <li>
+            <div><a href="#"><img style="max-width: 200px;max-height: 200px;min-width: 200px;min-height: 200px;"  src='2.jpg ' alt="这里是文字说明" border="0" onMouseOver="toolTip('<img src=2.jpg>')" onMouseOut="toolTip()"></a></div>
+        </li>
+      <!--  <li>
+            <div><a href="#"><img src="/jscss/demoimg/201109/c.jpg" alt=这里是文字说明 border=0 style="FILTER: alpha(opacity=55)" onmouseover=nereidFade(this,100,3,5) onmouseout=nereidFade(this,50,3,5)></a></div>
+        </li>
+        <li>
+            <div><a href="#"><img src="/jscss/demoimg/201109/d.jpg" alt=这里是文字说明 border=0 style="FILTER: alpha(opacity=55)" onmouseover=nereidFade(this,100,3,5) onmouseout=nereidFade(this,50,3,5)></a></div>
+        </li>-->
+    </ul>
+</div>
+<br />
+<script language="javascript" src="ToolTip.js"></script>
+</body>
+</html>

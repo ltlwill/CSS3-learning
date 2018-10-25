@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			a,a:hover,a:active,a:focus,a:active,a:visited{
+				text-decoration: none;
+				color: #000000;
+				cursor: pointer;
+			}
+			.container{
+				width: 400px;
+				height: 600px;
+				margin: 0px auto;
+				border: solid 1px green;
+			}
+			.bottom-bar{
+				position: fixed;
+				/*width: 60px;*/
+				/*height: 20px;
+				line-height: 20px;*/
+				right: 5px;
+				bottom: 5px;
+				font-size: 13px;
+				/*color: #FFF;*/
+				/*background-color:rgb(155,222,255);*/
+				/*border: solid 1px #000;*/
+			}
+			.bottom-bar > ul{
+				list-style: none;
+				list-style-type:none ;
+				display: block;
+				margin: 0;
+				padding: 0px;
+			}
+			.bottom-bar > ul > li{
+				list-style: none;
+				list-style-type: none;
+				border: solid 1px #000;
+				color: #000;
+				padding: 0px;
+				margin: 0px;
+				margin-bottom: 5px;
+			}
+			.bottom-bar > ul > li{
+				padding: 5px;
+			}
+			.go-top{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<a name="top" id="top" ></a>
+		<div class="container"></div>
+		
+		<div class="bottom-bar">
+			<ul>
+				<!--<li>
+					<a href="#top" class="link">返回顶部</a>
+				</li>-->
+				<li class="go-top">
+					<a id="to_top">顶部</a>
+				</li>
+				<li class="go-bottom">
+					<a id="to_bottom">底部</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		;(function(){
+			var goTopEle = document.querySelector('#to_top');
+			var goBottomEle = document.querySelector('#to_bottom');
+			var bodyEle = document.getElementsByTagName('body')[0];
+			var limitHeight = 100; 
+			window.addEventListener('scroll',function(evt){
+				console.log('scroll x:' + window.scrollX +';scroll y:' 
+					+ window.scrollY + ';body scroll height:' 
+					+ bodyEle.scrollHeight + ';body visiable height:' 
+					+ bodyEle.offsetHeight + ';body scrollTop:' 
+					+ bodyEle.scrollTop + ';body offsetTop:'
+					+ bodyEle.offsetTop + ';window inner height:'
+					+ window.innerHeight + ';window outer height:'
+					+ window.outerHeight + ';window scrollTop:' 
+					+ window.scrollTop + ';window offsetTop:'
+					+ window.offsetTop + ';window pageYOffset:'
+					+ window.pageYOffset);
+					
+				var _y = window.scrollY || window.pageYOffset;
+				if(_y > limitHeight)
+				{
+					goTopEle.parentNode.style.display = 'block';
+				}else
+				{
+					goTopEle.parentNode.style.display = 'none';
+				}
+				if(bodyEle.scrollHeight - (_y + window.innerHeight) < limitHeight)
+				{
+					goBottomEle.parentNode.style.display = 'none';
+				}else
+				{
+					goBottomEle.parentNode.style.display = 'block';
+				}
+			});
+			window.addEventListener('resize',resetAnchorStatus);
+			window.addEventListener('load',resetAnchorStatus);
+			
+			goTopEle.addEventListener('click',function(evt){
+				window.scrollTo(window.scrollX || window.pageXOffset,0);
+			});
+			goBottomEle.addEventListener('click',function(evt){
+				window.scrollTo(window.scrollX || window.pageXOffset,bodyEle.scrollHeight);
+			});
+			
+			function resetAnchorStatus()
+			{
+				if( bodyEle.scrollHeight - window.innerHeight > limitHeight)
+				{
+					goBottomEle.parentNode.style.display = 'block';
+				}else
+				{
+					goBottomEle.parentNode.style.display = 'none';
+				}
+			}
+			
+			function createElements()
+			{
+				var options = 
+				{
+					classes:{container: 'anchor-container',goTop: 'go-top',goBottom: 'go-bottom',goTopIcon:'fa fa-arrow-up',goBottomIcon:'fa fa-arrow-down'},
+					ids:{goTop: 'anchor_go_top',goBottom: 'anchor_go_bottom'},
+					titles:{goTop:'到顶部',goBottom:'到底部'},
+				};
+				var frag,div,ul,li,a,i;
+				frag = document.createDocumentFragment();
+				// 创建锚点容器
+				div = document.createElement('div');
+				div.className = options.classes.container;
+				frag.appendChild(div);
+				// 创建ul
+				ul = document.createElement('ul');
+				div.appendChild(ul);
+				// 创建到顶部按钮
+				li = document.createElement('li');
+				li.className = options.classes.goTop;
+				ul.appendChild(li);
+				a = document.createElement('a');
+				a.id = options.ids.goTop;
+				a.title = options.titles.goTop;
+				li.appendChild(a);
+				i = document.createElement('i');
+				i.className = options.classes.goTopIcon;
+				a.appendChild(i);
+				// 创建到底部按钮
+				li = document.createElement('li');
+				li.className = options.classes.goBottom;
+				ul.appendChild(li);
+				a = document.createElement('a');
+				a.id = options.ids.goBottom;
+				a.title = options.titles.goBottom;
+				li.appendChild(a);
+				i = document.createElement('i');
+				i.className = options.classes.goBottomIcon;
+				a.appendChild(i);
+				// 将锚点添加到body
+				bodyEle.appendChild(frag);
+			};
+		})();
+	</script>
+</html>
+
+

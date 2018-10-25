@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <!-- 页面5秒刷新一次 -->
+        <!--<meta http-equiv="refresh" content="5">-->
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta name="author" content="test">
+        <meta name="description" content="test">
+        <meta name="keywords" content="test,test1,test2">
+        <title>Multi Color Word</title>
+
+        <style>
+            *{
+                outline: none;
+                box-sizing: border-box;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            span{
+                position: relative;
+                font-size: 8rem;
+                color: red;
+
+            }
+            span::before/*,span::after*/{
+                content: attr(text);
+                position: absolute;
+                white-space: nowrap;
+                overflow: hidden;
+                display: inline-block;
+            }
+            span::before{
+                color: blue;
+                width: 50%;
+            }
+           /* span::after{
+                color: green;
+                width: 35%;
+                padding:0px 65% 0px 0px;
+                background: black;
+            }*/
+
+        </style>
+    </head>
+    <body>
+        <span text="浏">浏</span>
+        <span text="览">览</span>
+        <span text="器">器</span>
+    </body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="author" content="test">
+        <meta name="description" content="test">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+        <title>Test DL Label</title>
+        <style>
+            dl{
+                border: dashed 1px red
+            }
+            dt{
+                border: dotted 1px blueviolet;
+            }
+            dd{
+                border:  dotted 1px bisque;
+            }
+            div#tools{
+                width: 500px;
+                margin: auto;
+            }
+            div#tools a{
+                min-height: 20px;
+                line-height: 20px;
+                width: 30px;
+                min-width: 30px;
+                border: 1px solid grey;
+                cursor: pointer;
+            }
+            i.cls-1{
+                width: 0;
+                height: 0;
+                border-width: 100px;
+                border-style: dashed;
+                border-color:transparent;
+            }
+            i.cls-right{
+                border-bottom-color: red;
+                border-bottom-style: solid;
+            }
+            i.cls-top{
+                /*右三角*/
+                border-right-color: blue;
+                border-right-style: solid;
+                /*下三角*/
+                border-bottom-color: red;
+                border-bottom-style: solid;
+                /*左三角*/
+                border-left-color: aqua;
+                border-left-style: solid;
+                /*上三角*/
+                border-top-color: rgba(48,144,228,.2);
+            }
+        </style>
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="layer/layer-fmt.js"></script>
+        <!--[if IE]>
+            <style>
+                body{
+                    background: blueviolet;
+                }
+            </style>
+            <script>
+                window.console.log("IE 浏览器..");
+            </script>
+        <![endif]-->
+        <!--[if ! IE]>
+            <style>
+                body{
+                    background: pink;
+                }
+            </style>
+            <script>
+                window.console.log("非IE 浏览器..");
+            </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- 测试静态页面跳转 获取参数问题 -->
+        <form name="testForm" method="post" enctype="multipart/form-data" action="forward.html">
+            <input name="name" value="ltl"/>
+            <input name="address" value="asacsac"/>
+            <button type="submit">Submit</button>
+        </form>
+        <textarea id="execCode" rows="4" cols="40">
+            alert('我运行起来了....');
+        </textarea>
+        <input type="button" value="运行" onclick="execCode();"/>
+
+        <dl contenteditable="true" >
+            <dt draggable="true" contextmenu="supermenu" contenteditable="false">Coffee</dt>
+            <dd>Black hot drink</dd>
+            <dd>White hot drink</dd>
+            <dt>Milk</dt>
+            <dd>White cold drink</dd>
+            <dd>Red cold drink</dd>
+        </dl>
+
+        <dialog id="dialog" style="border: dotted 1px blue">
+            <dt>老师</dt>
+            <dd>2+2 等于？</dd>
+            <dt>学生</dt>
+            <dd>4</dd>
+            <dt>老师</dt>
+            <dd>答对了！</dd>
+        </dialog>
+        <menu id="supermenu">
+            <command label="Step 1: Write Tutorial" onclick="doSomething()"/>
+            <command label="Step 2: Edit Tutorial" onclick="doSomethingElse()"/>
+        </menu>
+
+        <article>
+            <h2>Netscape Is Dead</h2>
+            AOL has now officially announced that they will end
+            the development and support of all Netscape browsers.
+        </article>
+
+        <div id="tools">
+            <a id="lay_alert">Alert</a>
+            <a id="lay_tips">Tips</a>
+            <a id="lay_tips-top">Tips</a>
+            <a id="do_past">粘贴</a>
+
+           <!-- <i class="cls-1 cls-right"></i>
+            <i class="cls-1 cls-top"></i>-->
+
+        </div>
+
+        <script type="text/javascript">
+            ;!function(){
+                $("#lay_alert").click(function()
+                {
+                    var index = layer.alert("NIMA",{title:"fuck",shade:false},function(){
+                       layer.close(index);
+                    });
+                });
+                $("#lay_tips").click(function(){
+                    layer.tips('Hi，我是tips',this,{time:0});
+                });
+                $("#lay_tips-top").click(function()
+                {
+                    layer.tips("另外的tips,在上面",this,{tips:[1,'red'],time:5000});
+                });
+                $("#do_past").mouseover(function(){
+                    document.execCommand("paste");
+                });
+            }();
+
+            // 执行动态的脚本
+            function execCode()
+            {
+                // 1.用eval执行程序
+                //eval($("#execCode").val());
+
+                // 2.new Function('code')();执行程序
+                //new Function($("#execCode").val())();
+                //new Function($("#execCode").val()).call();
+                //new Function($("#execCode").val()).apply();
+
+                // 3.动态创建script标签，并指定此标签的内容为要执行的代码串
+                var ele = document.createElement("script");
+                ele.type = 'text/javascript';
+                ele.innerHTML = $("#execCode").val();
+                var head = document.head || document.getElementsByName('head')[0];
+                head.appendChild(ele);
+                head.removeChild(ele);
+            }
+        </script>
+    </body>
+
+</html>

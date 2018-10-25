@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="author" content="test">
+        <meta name="description" content="test">
+        <meta name="viewport" content="width=device-width;initial-scale=1.0">
+        <title>Drag for upload file</title>
+        <style>
+            .drag-area{
+                background: #fff none no-repeat;
+                border:dashed 1px darkslategray;
+                width: 300px;
+                min-width: 300px;
+                height: 200px;
+                min-height: 200px;
+                text-align: center;
+                vertical-align:middle;
+                font-family: Arial;
+                line-height: 200px;
+                float: left;
+            }
+            .drag-area-active{
+                -webkit-box-shadow: inset 1px -2px 4px 1px skyblue, inset -1px 2px 4px 1px skyblue;
+                -moz-box-shadow: inset 1px -2px 4px 1px skyblue,inset -1px 2px 4px 1px skyblue;
+                box-shadow: inset 1px -2px 4px 1px skyblue,inset -1px 2px 4px 1px skyblue;
+                bordr:dashed 1px darkslategray;
+            }
+            .preview-area{
+                width: 300px;
+                float: left;
+                margin-left: 1px;
+            }
+            .preview-area-active
+            {
+                border: solid 1px cornflowerblue;
+                width: 300px;
+                height: auto;
+                min-height: 200px;
+            }
+            .container{
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+            }
+            .preview-img{
+                width:85px !important;
+                height:55px !important;
+                margin:0 5px;
+                border:2px #CCC solid;
+            }
+            .preview-text{
+                width:85px !important;
+                min-width: 85px !important;
+                height:55px !important;
+                min-height: 85px !important;
+                margin:0 5px;
+                border:2px #CCC solid;
+                text-overflow: ellipsis;
+            }
+         </style>
+    <head>
+    <body>
+        <div class="container">
+            <div id="drag-area" class="drag-area">
+                拖放文件到此处
+            </div>
+            <div id="preview-area" class="preview-area"></div>
+        </div>
+        <script type="text/javascript" src="drag.js"></script>
+    </body>
+</html>

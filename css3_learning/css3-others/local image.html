@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <!-- 页面5秒刷新一次 -->
+        <!--<meta http-equiv="refresh" content="5">-->
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta name="author" content="test">
+        <meta name="description" content="test">
+        <meta name="keywords" content="test,test,test">
+        <style>
+            img{
+                width:300px;
+                height: 200px;
+                border: solid 1px #ccc;
+            }
+        </style>
+
+    </head>
+    <body>
+
+    <!--
+        关于html中url地址中以“//”(双斜杠开头)开头写法意义：
+        这种写法有特殊的用途，它会自动判断当前页面是什么协议（如:http,https,file等等），防止IE下出现“This Page Contains Both Secure and Non-Secure Items”的错误，
+        当然，当你浏览的是本地文件时，它会解析为file://协议，这种特性可以用来加速CDN，也可以用在CSS上，如：img{background:url(//www.taobao.com/sa.png)}
+        注意：如果在IE7，IE8中使用 和 @import 引入 CSS 的时候，会下载两次 CSS 文件
+        这种方式的写法在 淘宝、京东上很常见
+
+     -->
+        <img src="11.jpg"/>
+        <img src="file:///D:/test/2121/12.jpg">
+        <img src="//D:/test/2121/12.jpg">
+    </body>
+</html>

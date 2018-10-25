@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<meta name="author" content="ltlwill"/>
+		<meta name="copyright" content="ltlwill" />
+		<meta name="description" content="JS for battery" />
+		<meta name="keywords" content="JS,Battery" />
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			;(function(win){
+				var battery = window.navigator.battery 
+				|| window.navigator.webkitBattery 
+				|| window.navigator.mozBattery;
+				if(!battery)
+				{
+					return false;
+				}
+				// 电池相关属性
+				window.console.log('电池充电状态：' + (battery.charging ? '充电中' : '没有充电'));
+				window.console.log('电池电量：' + (battery.level*100 + '%'));
+				window.console.log('电池充满剩余时间：' + battery.chargingTime);
+				window.console.log('电池已使用时间：' + battery.dischargingTime);
+				
+				// 电池相关事件
+				// 1.电池充电状态变化状态
+				battery.addEventListener('chargingchange',function(evt){
+					window.console.log('电池充电状态变化：' +　(battery.charging ? '充电中' : '没有充电'));
+				});
+				// 2.电池剩余时间变化事件
+				battery.addEventListener('chargingtimechange',function(evt){
+					window.console.log('电池剩余充电时间变化：' +　battery.chargingTime);
+				});
+				// 3.电池使用时间变化事件
+				battery.addEventListener('dischargingtimechange',function(evt){
+					window.console.log('电池已使用时间变化：' +　battery.dischargingTime);
+				});
+				// 4.电池电量变化事件
+				battery.addEventListener('levelchange',function(evt){
+					window.console.log('电池电量变化：' + (battery.level * 100 + '%'));
+				});
+			})(window);
+		</script>
+	</body>
+</html>

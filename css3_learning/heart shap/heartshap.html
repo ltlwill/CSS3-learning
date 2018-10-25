@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+        <meta name="author" content="test">
+        <meta name="description" content="test">
+        <meta name="copyright" content="ltlwill">
+        <meta name="viewport" content="width=device-width;height=device-height;initial-scale=1.0">
+        <title>Heart Shap</title>
+        <style>
+            *::before,*::after{
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                position: absolute;
+                content: "";
+            }
+            .shap-container
+            {
+                width: 100px;
+                height: 80px;
+                background: #CDA;
+                /*background: transparent;*/
+                margin: 50px auto;
+                position: relative;
+            }
+            .i-shap{
+                position: absolute;
+                width: 20px;
+                height: 80px;
+                background: red;
+                left: 40px;
+
+            }
+            .i-shap::before,.i-shap::after{
+                width: 40px;
+                height: 10px;
+                background: red;
+                left: -10px;
+                border-radius: 5px;
+            }
+            .i-shap::before{
+                top: 0;
+            }
+            .i-shap::after
+            {
+                bottom: 0;
+            }
+
+            .heart-shap::before,.heart-shap::after{
+                background: red;
+                width: 50px;
+                height: 80px;
+                -webkit-border-radius: 50px 50px 0 0;
+                -moz-border-radius: 50px 50px 0 0;
+                border-radius: 50px 50px 0 0;
+                top: 0px;
+            }
+            .heart-shap::before{
+                left: 50px;
+                -webkit-transform:  rotate(-45deg);
+                -moz-transform:  rotate(-45deg);
+                -ms-transform:  rotate(-45deg);
+                -o-transform:  rotate(-45deg);
+                transform:  rotate(-45deg);
+                transform-origin: left bottom;/*0 100%*//*左下角为基点旋转*/
+            }
+            .heart-shap::after{
+                left: 0px;
+                -webkit-transform:  rotate(45deg);
+                -moz-transform:  rotate(45deg);
+                -ms-transform:  rotate(45deg);
+                -o-transform:  rotate(45deg);
+                transform:  rotate(45deg);
+                transform-origin: right bottom;/*100% 100%*//*右下角为基点旋转*/
+            }
+
+            .u-shap{
+                width: 50px;
+                height: 20px;
+                background: red;
+                position: absolute;
+                left: 25%;
+                bottom: 0px;
+            }
+            .u-shap::before,.u-shap::after{
+                width: 15px;
+                height: 80px;
+                background: red;
+                top: -60px;
+            }
+            .u-shap::before{
+                left: -15px;
+                border-radius:2px 2px 0 5px;
+            }
+            .u-shap::after{
+                right: -15px;
+                border-radius: 2px 2px 5px 0;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="shap-container"><div class="i-shap"></div></div>
+        <div class="shap-container heart-shap"></div>
+        <div class="shap-container"><div class="u-shap"></div></div>
+    </body>
+</html>
